@@ -11,10 +11,11 @@ library(dplyr)
 
 source('Demodata.R')
 # Define server logic required to draw a histogram
-
+    urls <- a("信義區地圖", href="https://www.google.com/")
+    urlc <- a("中正區地圖", href="https://ithelp.ithome.com.tw/m/users/20121116/ironman/2860?page=2")
+    urlr <- a("仁愛區地圖", href="https://www.google.com/")
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
-<<<<<<< HEAD
       if(input$industry==""&input$name==""&input$district=="全部") return(demodata)
         if(input$district=="全部"){demodata %>% 
           filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name))
@@ -22,17 +23,22 @@ shinyServer(function(input, output) {
           filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name)&str_detect(demodata$地址,input$district))  
                                       }
                               
-=======
-      if(input$industry==""&input$name=="") return(demodata)
-    demodata %>%
-        filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name))
->>>>>>> fba2ea5875ae6764f9cd1e19c4775d937bd5b06e
    })
     output$demo2  <-renderTable({
       demodata %>%
         filter(input$capital<demodata$總資本額)
     })
-  
+
+    output$tab <- renderUI({
+      if(input$district=="中正區"){
+        tagList("Map link:", urlc)
+      }else if(input$district=="信義區"){
+        tagList("Map link:", urls)
+      }else if(input$district=="仁愛區"){
+        tagList("Map link:", urlr)
+      }
+    
+    })
   
 })
 
