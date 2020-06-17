@@ -14,9 +14,19 @@ source('Demodata.R')
 
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
+<<<<<<< HEAD
+      if(input$industry==""&input$name==""&input$district=="全部") return(demodata)
+        if(input$district=="全部"){demodata %>% 
+          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name))
+          }  else{demodata %>% 
+          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name)&str_detect(demodata$地址,input$district))  
+                                      }
+                              
+=======
       if(input$industry==""&input$name=="") return(demodata)
     demodata %>%
         filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name))
+>>>>>>> fba2ea5875ae6764f9cd1e19c4775d937bd5b06e
    })
     output$demo2  <-renderTable({
       demodata %>%
