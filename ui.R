@@ -14,6 +14,7 @@ shinyUI(navbarPage("公司資訊",
                                                             c("全部","中正區", "信義區", "仁愛區") )),
                                                 column(2,textInput("industry",label = "產業別" ,value = "" )),
                                                 column(2,textInput("name",label = "公司名稱" ,value = "" )),
+                                                uiOutput("tab"),
                                                 column(12,wellPanel(tableOutput('demo')))
                                                 )),
                    tabPanel("資本額",fluidRow(

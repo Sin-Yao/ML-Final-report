@@ -11,7 +11,9 @@ library(dplyr)
 
 source('Demodata.R')
 # Define server logic required to draw a histogram
-
+    urls <- a("信義區地圖", href="https://www.google.com/")
+    urlc <- a("中正區地圖", href="https://ithelp.ithome.com.tw/m/users/20121116/ironman/2860?page=2")
+    urlr <- a("仁愛區地圖", href="https://www.google.com/")
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
       if(input$industry==""&input$name==""&input$district=="全部") return(demodata)
@@ -26,7 +28,17 @@ shinyServer(function(input, output) {
       demodata %>%
         filter(input$capital<demodata$總資本額)
     })
-  
+
+    output$tab <- renderUI({
+      if(input$district=="中正區"){
+        tagList("Map link:", urlc)
+      }else if(input$district=="信義區"){
+        tagList("Map link:", urls)
+      }else if(input$district=="仁愛區"){
+        tagList("Map link:", urlr)
+      }
+    
+    })
   
 })
 
