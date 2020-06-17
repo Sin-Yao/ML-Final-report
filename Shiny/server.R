@@ -11,18 +11,20 @@ library(dplyr)
 
 source('Demodata.R')
 # Define server logic required to draw a histogram
-    urls <- a("信義區地圖", href="https://www.google.com/")
-    urlc <- a("中正區地圖", href="https://ithelp.ithome.com.tw/m/users/20121116/ironman/2860?page=2")
-    urlr <- a("仁愛區地圖", href="https://www.google.com/")
+    urls <- a("信義區地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/trush.html")
+    urlc <- a("中正區地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/zhong.html")
+    urlr <- a("仁愛區地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/love.html")
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
-      if(input$industry==""&input$name==""&input$district=="全部") return(demodata)
-        if(input$district=="全部"){demodata %>% 
-          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name))
-          }  else{demodata %>% 
-          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name)&str_detect(demodata$地址,input$district))  
+      if(input$city=="基隆市"&input$industry==""&input$name==""&input$district=="") return(demodata)
+        if(input$city=="基隆市"&input$insurance==""){demodata %>% 
+          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name)&str_detect(demodata$地址,input$district))
+          }  else if(input$city=="基隆市"&input$insurance=="火災保險"){demodata %>% 
+          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name)&str_detect(demodata$地址,input$district)&demodata$火災保險=="True")  
                                       }
-                              
+             else if(input$city=="基隆市"&input$insurance=="公共安全責任險"){demodata %>% 
+          filter(str_detect(demodata$產業別,input$industry)&str_detect(demodata$名稱,input$name)&str_detect(demodata$地址,input$district)&demodata$公共安全責任險=="True")  
+             }
    })
     output$demo2  <-renderTable({
       demodata %>%
@@ -30,11 +32,11 @@ shinyServer(function(input, output) {
     })
 
     output$tab <- renderUI({
-      if(input$district=="中正區"){
+      if(input$city=="基隆市"&input$district=="中正區"){
         tagList("Map link:", urlc)
-      }else if(input$district=="信義區"){
+      }else if(input$city=="基隆市"&input$district=="信義區"){
         tagList("Map link:", urls)
-      }else if(input$district=="仁愛區"){
+      }else if(input$city=="基隆市"&input$district=="仁愛區"){
         tagList("Map link:", urlr)
       }
     
