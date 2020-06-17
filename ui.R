@@ -10,7 +10,12 @@ library(stringr)
 library(dplyr)
 
 shinyUI(navbarPage("公司資訊",
+<<<<<<< HEAD
+                   tabPanel("查詢",fluidRow(    column(2,selectInput('district', '行政區域', 
+                                                            c("全部","中正區", "信義區", "仁愛區") )),
+=======
                    tabPanel("查詢",fluidRow(
+>>>>>>> fba2ea5875ae6764f9cd1e19c4775d937bd5b06e
                                                 column(2,textInput("industry",label = "產業別" ,value = "" )),
                                                 column(2,textInput("name",label = "公司名稱" ,value = "" )),
                                                 column(12,wellPanel(tableOutput('demo')))
