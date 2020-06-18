@@ -5,8 +5,8 @@ account: sinyaoandychao
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2466148
-bundleId: 3287134
+bundleId: 3287183
 url: https://sinyaoandychao.shinyapps.io/Finaldemo/
-when: 1592482765.7889
+when: 1592483751.3524
 asMultiple: FALSE
 asStatic: FALSE

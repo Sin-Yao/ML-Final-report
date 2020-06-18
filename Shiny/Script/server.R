@@ -11,10 +11,10 @@ library(dplyr)
 
 source('Demodata.R')
 # Define server logic required to draw a histogram
-    urls   <- a("信義區", href="https://sin-yao.github.io/ML-Final-report/Shiny/truth.html")
-    urlc   <- a("中正區", href="https://sin-yao.github.io/ML-Final-report/Shiny/zhong.html")
-    urlr   <- a("仁愛區", href="https://sin-yao.github.io/ML-Final-report/Shiny/love.html")
-    urlall <- a("基隆市", href="https://sin-yao.github.io/ML-Final-report/Shiny/all.html")
+    urls   <- a("信義區", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/truth.html")
+    urlc   <- a("中正區", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/zhong.html")
+    urlr   <- a("仁愛區", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/love.html")
+    urlall <- a("基隆市", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/all.html")
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
       if(input$city=="基隆市"&input$industry==""&input$name==""&input$district=="") return(demodata)
