@@ -11,9 +11,10 @@ library(dplyr)
 
 source('Demodata.R')
 # Define server logic required to draw a histogram
-    urls <- a("信義區地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/trush.html")
-    urlc <- a("中正區地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/zhong.html")
-    urlr <- a("仁愛區地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/love.html")
+    urls   <- a("信義區", href="https://sin-yao.github.io/ML-Final-report/Shiny/trush.html")
+    urlc   <- a("中正區", href="https://sin-yao.github.io/ML-Final-report/Shiny/zhong.html")
+    urlr   <- a("仁愛區", href="https://sin-yao.github.io/ML-Final-report/Shiny/love.html")
+    urlall <- a("基隆市", href="https://sin-yao.github.io/ML-Final-report/Shiny/all.html")
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
       if(input$city=="基隆市"&input$industry==""&input$name==""&input$district=="") return(demodata)
@@ -32,12 +33,14 @@ shinyServer(function(input, output) {
     })
 
     output$tab <- renderUI({
-      if(input$city=="基隆市"&input$district=="中正區"){
-        tagList("Map link:", urlc)
+      if(input$city=="基隆市"&input$district==""){
+        tagList("地圖:", urlall)
+      }else if(input$city=="基隆市"&input$district=="中正區"){
+        tagList("地圖:", urlc)
       }else if(input$city=="基隆市"&input$district=="信義區"){
-        tagList("Map link:", urls)
+        tagList("地圖:", urls)
       }else if(input$city=="基隆市"&input$district=="仁愛區"){
-        tagList("Map link:", urlr)
+        tagList("地圖:", urlr)
       }
     
     })
