@@ -1,0 +1,12 @@
+name: Finaldemo
+title: Finaldemo
+username:
+account: sinyaoandychao
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2466148
+bundleId: 3287134
+url: https://sinyaoandychao.shinyapps.io/Finaldemo/
+when: 1592482765.7889
+asMultiple: FALSE
+asStatic: FALSE
