@@ -10,11 +10,15 @@ library(stringr)
 library(dplyr)
 
 source('Demodata.R')
+randomVals <-5
 # Define server logic required to draw a histogram
     urls   <- a("信義區", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/truth.html")
     urlc   <- a("中正區", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/zhong.html")
     urlr   <- a("仁愛區", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/love.html")
     urlall <- a("基隆市", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/all.html")
+    route1 <- a("地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/route1.html")
+    route1_d <- a("地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/route1_driving.html")
+    route2_d <- a("地圖", href="https://sin-yao.github.io/ML-Final-report/Shiny/HTML/route2_driving.html")
 shinyServer(function(input, output) {
     output$demo  <-renderTable({
       if(input$city=="基隆市"&input$industry==""&input$name==""&input$district=="") return(demodata)
@@ -44,9 +48,30 @@ shinyServer(function(input, output) {
       }
     
     })
-  
+    
+    output$tab2 <- renderUI({
+      if(randomVals()<1&str_detect(input$end,"南榮")&input$method=="大眾運輸"){
+        tagList("地圖:", route1)
+      }else if(randomVals()<1&str_detect(input$end,"南榮")&input$method=="開車"){
+        tagList("地圖:", route1_d)
+      }else if(randomVals()<1&str_detect(input$end,"中船")&input$method=="開車"){
+        tagList("地圖:", route2_d)
+      }
+      
+    })
+    randomVals <- eventReactive(input$go, {
+      runif(1)
+    })
+    output$demo3  <-renderTable({
+      if(randomVals()<1&str_detect(input$end,"南榮")&input$method=="大眾運輸")  {
+       route1data
+      }else if(randomVals()<1&str_detect(input$end,"南榮")&input$method=="開車"){
+        route1ddata
+      }else if(randomVals()<1&str_detect(input$end,"中船")&input$method=="開車"){
+        route2ddata
+      }
+    })
+    
 })
 
-#output$demo  <-renderTable({
- # Order<-grepl(input$industry,demodata$產業別)
-  #demodata[Order,]
+

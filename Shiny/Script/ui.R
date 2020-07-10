@@ -27,7 +27,18 @@ shinyUI(navbarPage("公司資訊",
                                         min = 0, max = 5000000, value = 500000,
                                         step = 1000000, round = 0)),
                      column(12,wellPanel(tableOutput('demo2')))
+                   )),
+                   
+                   tabPanel("路徑規劃",fluidRow(
+                     column(2,selectInput('method', "交通工具", 
+                                          c("","大眾運輸", "開車","騎車") )),
+                     column(2,textInput("start",label = "起點" ,value = "" )),
+                     column(2,textInput("end",label = "終點" ,value = "" )),
+                     actionButton("go", "Search"),
+                     uiOutput("tab2"),
+                     column(12,wellPanel(tableOutput('demo3')))
                    ))
+                  
 
                    
                    
